@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'pl.nowoczesnyandroid.introtocomposeklubmobile'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "pl.nowoczesnyandroid.introtocomposeklubmobile"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -65,4 +65,5 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime-compose:2.6.0-alpha03'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.0-alpha03'
     implementation "androidx.navigation:navigation-compose:2.6.0-alpha04"
+    implementation "com.google.accompanist:accompanist-navigation-animation:0.27.1"
 }
