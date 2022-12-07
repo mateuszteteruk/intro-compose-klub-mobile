@@ -17,6 +17,7 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -24,10 +25,12 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun RecipeDetails(
-    recipeTitle: String,
+    recipeId: String,
     onBack: () -> Unit,
 ) {
-    val recipe = defaultRecipes.first { it.title == recipeTitle }
+    val recipe = remember {
+        defaultRecipes.first { it.title == recipeId }
+    }
 
     RecipeDetails(
         recipe = recipe,
@@ -46,9 +49,12 @@ private fun RecipeDetails(
                 title = {},
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.Rounded.ArrowBack, "")
+                        Icon(
+                            imageVector = Icons.Rounded.ArrowBack,
+                            contentDescription = "back_icon"
+                        )
                     }
-                },
+                }
             )
         }
     ) { paddingValues ->
@@ -64,12 +70,17 @@ private fun RecipeDetails(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(400.dp),
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
             )
-            Column(modifier = Modifier.padding(16.dp)) {
-                Text(text = recipe.title, style = MaterialTheme.typography.h4)
+            Column(
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Text(
+                    text = recipe.title,
+                    style = MaterialTheme.typography.h4
+                )
                 (recipe.ingredients + recipe.ingredients + recipe.ingredients).forEach {
-                    Text("- $it")
+                    Text(text = " - $it")
                 }
             }
         }

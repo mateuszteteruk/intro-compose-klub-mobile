@@ -26,36 +26,36 @@ import androidx.compose.ui.unit.dp
 fun RecipeCard(
     recipe: Recipe,
     onRecipeClick: (Recipe) -> Unit,
-    modifier: Modifier = Modifier,
 ) {
-    Surface(modifier = modifier, shape = RoundedCornerShape(8.dp), elevation = 8.dp) {
-        Box(modifier = Modifier
-            .fillMaxWidth()
-            .height(200.dp)
-            .clickable { onRecipeClick(recipe) }
+    Surface(shape = RoundedCornerShape(8.dp), elevation = 8.dp) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp)
+                .clickable { onRecipeClick(recipe) },
         ) {
             Image(
                 painter = painterResource(id = recipe.imageResource),
                 contentDescription = recipe.title,
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 contentScale = ContentScale.Crop,
             )
-            Box(modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    Brush.radialGradient(
-                        colors = listOf(Color(0xfffcd4f0), Color.Transparent),
-                        center = Offset(0F, Float.POSITIVE_INFINITY),
-                        radius = 850F,
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.radialGradient(
+                            colors = listOf(Color.White, Color.Transparent),
+                            center = Offset(0F, Float.POSITIVE_INFINITY),
+                            radius = 1000F,
+                        )
                     )
-                )
             )
             Text(
+                text = recipe.title,
                 modifier = Modifier
                     .align(Alignment.BottomStart)
                     .padding(16.dp),
-                text = recipe.title,
                 style = MaterialTheme.typography.h4
             )
         }

@@ -9,13 +9,13 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
-sealed class SongDestination(
+sealed class RecipeDestination(
     val route: String,
 ) {
 
-    object Recipes : SongDestination(route = "recipes")
+    object Recipes : RecipeDestination(route = "recipes")
 
-    object Recipe : SongDestination(route = "recipe/{recipeId}") {
+    object Recipe : RecipeDestination(route = "recipe/{recipeId}") {
 
         fun createRoute(recipeId: String): String =
             "recipe/$recipeId"
@@ -29,17 +29,17 @@ fun RecipesNavigation(
 ) {
     AnimatedNavHost(
         navController = navController,
-        startDestination = SongDestination.Recipes.route,
+        startDestination = RecipeDestination.Recipes.route,
     ) {
-        composable(route = SongDestination.Recipes.route) {
-            RecipeList(
+        composable(route = RecipeDestination.Recipes.route) {
+            RecipesList(
                 onRecipeClick = { recipe ->
-                    navController.navigate(SongDestination.Recipe.createRoute(recipeId = recipe.title))
+                    navController.navigate(RecipeDestination.Recipe.createRoute(recipeId = recipe.title))
                 }
             )
         }
         composable(
-            route = SongDestination.Recipe.route,
+            route = RecipeDestination.Recipe.route,
             arguments = listOf(
                 navArgument("recipeId") {
                     type = NavType.StringType
@@ -48,7 +48,7 @@ fun RecipesNavigation(
         ) {
             val recipeTitle = requireNotNull(it.arguments?.getString("recipeId"))
             RecipeDetails(
-                recipeTitle = recipeTitle,
+                recipeId = recipeTitle,
                 onBack = { navController.popBackStack() }
             )
         }
